@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4>Registrar Ponto</h4>
+    </div>
+    <hr>
+    <form [formGroup]="form">
+      <div class="row bottom-10">
+        <div class="col-lg-2">
+          <label for="dataNascimento">Data: *</label>
+          <input class="form-control" formControlName="data" id="data" name="data" type="date">
+          <div class="text-danger"
+              *ngIf="form.get('data').getError('required') && form.get('data').touched">
+              Este campo é obrigatório
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <label for="dataNascimento">Hora: *</label>
+          <input class="form-control" formControlName="hora" id="hora" name="hora" type="time">
+          <div class="text-danger"
+              *ngIf="form.get('hora').getError('required') && form.get('hora').touched">
+              Este campo é obrigatório
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <label for="colaborador">Colaborador:</label>
+          <select formControlName="colaborador" name="colaborador" id="colaborador" class="form-select" class="form-control">
+              <option [value]="item.id" *ngFor="let item of colaboradores" class="form-control">{{ item.nome }}</option>
+          </select>
+          <div class="text-danger"
+              *ngIf="form.get('colaborador').getError('required') && form.get('colaborador').touched">
+              Este campo é obrigatório
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <label>Entrada/Saída:</label>
+          <br>
+          <div class="form-check form-check-inline top-10">
+            <input class="form-check-input" type="radio" name="entradaSaida" id="entradaSaida1" value="E" formControlName="entradaSaida" >
+            <label class="form-check-label" for="entrada">Entrada</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="entradaSaida" id="entradaSaida2" value="S" formControlName="entradaSaida" >
+            <label class="form-check-label" for="saida">Saída</label>
+          </div>
+          <div class="text-danger"
+              *ngIf="form.get('entradaSaida').getError('required') && form.get('entradaSaida').touched">
+              Este campo é obrigatório
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button (click)="salvar()" [disabled]="!form.valid" class="btn btn-primary">Registar ponto</button>
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-success" role="alert" *ngIf="salvou" >
+      Salvo com suscesso!
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="mostraMsgErro" >
+      Ocorreu um problema ao salvar o colaborador! {{msgErro}}
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4>Adicionar colaborador</h4>
+
+      <form [formGroup]="form">
+
+        <h5>Dados Pessoais</h5> <span class="msgErro" *ngIf="mostraMsgErro">{{msgErro}}</span>
+        <hr>
+
+        <div class="row bottom-10">
+          <div class="col-lg-6">
+            <label for="nome">Nome: *</label>
+            <input formControlName="nome" id="nome" type="text" class="form-control">
+            <div class="text-danger"
+                 *ngIf="form.get('nome').getError('required') && form.get('nome').touched">
+              Este campo é obrigatório.
+            </div>
+            <div class="text-danger" *ngIf="form.get('nome').getError('maxlength')">
+              Este campo aceita apenas 100 caracteres.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <button (click)="salvar()" [disabled]="!form.valid" class="btn btn-primary">Salvar colaborador</button>
+          </div>
+        </div>
+      </form>
+      <br />
+      <div class="alert alert-success" role="alert" *ngIf="salvou" >
+        Salvo com suscesso!
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="mostraMsgErro" >
+        Ocorreu um problema ao salvar o colaborador! {{msgErro}}
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="col-12">
+    <h4>Lista de colaboradores</h4>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of colaboradores">
+        <td>{{ item.nome }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
