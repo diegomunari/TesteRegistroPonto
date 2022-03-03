@@ -17,5 +17,7 @@ namespace Teste.Web.DTOs
 
         [Required]
         public Colaborador Colaborador { get; set; }
+
+        public string HorasTrabalhadas { get; set; }
     }
 }

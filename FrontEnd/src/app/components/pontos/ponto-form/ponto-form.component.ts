@@ -37,6 +37,8 @@ export class PontoFormComponent implements OnInit {
   }
 
   salvar() {
+    this.salvou = false
+    this.mostraMsgErro = false
 
     console.log(this.form.get("colaborador").value)
 
@@ -47,14 +49,14 @@ export class PontoFormComponent implements OnInit {
     }
     console.log(ponto)
 
-    // this.pontoS.post(ponto)
-    //   .then(() => {
-    //     this.salvou = true
-    //   })
-    //   .catch((error) => {
-    //     this.mostraMsgErro = true
-    //     this.msgErro = error['error'].message
-    //   })
+    this.pontoS.post(ponto)
+      .then(() => {
+        this.salvou = true
+      })
+      .catch((error) => {
+        this.mostraMsgErro = true
+        this.msgErro = error['error'].message
+      })
   }
 
   buildForm() {

@@ -20,5 +20,7 @@ export class PontoService {
     return this.base.post(this.urlAPI, data).toPromise();
   }
 
-
+  getByDataColaborador(consulta) {
+    return this.base.post(this.urlAPI + "/Busca/", consulta).toPromise();
+  }
 }

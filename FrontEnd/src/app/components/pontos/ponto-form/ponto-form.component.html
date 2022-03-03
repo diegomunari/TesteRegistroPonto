@@ -59,11 +59,13 @@
         </div>
       </div>
     </form>
-    <div class="alert alert-success" role="alert" *ngIf="salvou" >
-      Salvo com suscesso!
-    </div>
-    <div class="alert alert-danger" role="alert" *ngIf="mostraMsgErro" >
-      Ocorreu um problema ao salvar o colaborador! {{msgErro}}
+    <div class="container top-10">
+      <div class="alert alert-success" role="alert" *ngIf="salvou" >
+        Ponto registrado!
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="mostraMsgErro" >
+        Não foi possível registrar o ponto! {{msgErro}}
+      </div>
     </div>
 
   </div>

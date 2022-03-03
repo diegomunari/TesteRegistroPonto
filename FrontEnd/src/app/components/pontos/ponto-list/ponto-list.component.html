@@ -1,3 +1,66 @@
-<p>
-  ponto-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4>Consultar Registros de Ponto</h4>
+    </div>
+  </div>
+  <hr>
+
+  <form [formGroup]="form">
+    <div class="row bottom-10">
+      <div class="col-lg-3">
+        <label for="dataNascimento">Data: *</label>
+        <input class="form-control" formControlName="data" id="data" name="data" type="month">
+        <div class="text-danger"
+            *ngIf="form.get('data').getError('required') && form.get('data').touched">
+            Este campo é obrigatório
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <label for="colaborador">Colaborador:</label>
+        <select formControlName="colaborador" name="colaborador" id="colaborador" class="form-select" class="form-control">
+            <option [value]="item.id" *ngFor="let item of colaboradores" class="form-control">{{ item.nome }}</option>
+        </select>
+        <div class="text-danger"
+            *ngIf="form.get('colaborador').getError('required') && form.get('colaborador').touched">
+            Este campo é obrigatório
+        </div>
+      </div>
+
+      <div class="col-lg-5 top-btn">
+        <button (click)="buscar()" [disabled]="!form.valid" class="btn btn-primary">Buscar registros</button>
+      </div>
+
+    </div>
+  </form>
+
+  <div class="row top-20"  *ngIf="pontos.length > 0">
+    <hr>
+    <div class="col-12">
+      <h4>Registro de Ponto</h4>
+    </div>
+    <br><br>
+    <p>Colaborador: <b>{{pontos[0].colaborador.nome}}</b></p>
+    <p>Mês/Ano: <b>{{pontos[0].data.substr(3,2) + "/" + pontos[0].data.substr(6,4) }}</b></p>
+    <p>Total de horas trabalhadas: <b>{{pontos[pontos.length - 1].horasTrabalhadasTotal }}</b></p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col" class="col-2">Data</th>
+          <th scope="col" class="col-2">Entrada</th>
+          <th scope="col" class="col-2">Saída</th>
+          <th scope="col" class="col-6">Horas Trabalhadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pontos">
+          <td>{{ item.data }}</td>
+          <td>{{ item.horaEntrada }}</td>
+          <td>{{ item.horaSaida }}</td>
+          <td>{{ item.horasTrabalhadas }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
